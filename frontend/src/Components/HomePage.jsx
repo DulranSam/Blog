@@ -14,7 +14,7 @@ const HomePage = () => {
       setPosts(response.data);
     } catch (err) {
       console.error(err);
-      setStatus("Error fetching posts. Please try again."); // Provide a more user-friendly error message
+      setStatus("Error fetching posts. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -24,11 +24,11 @@ const HomePage = () => {
     try {
       setLoading(true);
       await Axios.delete(`http://localhost:5000/home/${id}`);
-      // You might want to update the state to reflect the deleted post
+
       setPosts((prevPosts) => prevPosts.filter((post) => post._id !== id));
     } catch (err) {
       console.error(err);
-      setStatus("Error deleting post. Please try again."); // Provide a more user-friendly error message
+      setStatus("Error deleting post. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -50,7 +50,12 @@ const HomePage = () => {
               <h1>{post.title}</h1>
               <img src={post.image} alt={`Image of ${post.title}`} />
               <h2>{post.description}</h2>
-              <a href={post.link}>Click Here to learn more</a>
+              {post.link ? (
+                <a href={post.link}>Click Here to learn more</a>
+              ) : (
+                <h1>Link Unavailable</h1>
+              )}
+
               <button
                 onClick={() => {
                   deletePost(post._id);

@@ -23,7 +23,7 @@ const AddPost = () => {
         link,
         photo,
       });
-      if (newPostData.status === 200) {
+      if (newPostData.status === 201) {
         setError("Post Added");
       }
     } catch (err) {
