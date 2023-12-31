@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -34,6 +33,20 @@ const HomePage = () => {
     }
   };
 
+  const modifyPost = async (id) => {
+    try {
+      setLoading(true);
+      await Axios.put(`http://localhost:5000/home/${id}`);
+
+      setPosts((prevPosts) => prevPosts.filter((post) => post._id !== id));
+    } catch (err) {
+      console.error(err);
+      setStatus("Error deleting post. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     displayPosts();
   }, []);
@@ -55,7 +68,7 @@ const HomePage = () => {
               ) : (
                 <h1>Link Unavailable</h1>
               )}
-
+              <button onClick={modifyPost}>Modify Post</button>
               <button
                 onClick={() => {
                   deletePost(post._id);
@@ -69,7 +82,7 @@ const HomePage = () => {
           <h1>No posts available</h1>
         )}
       </div>
-      <Link to="/addpost">Add Post</Link>
+
       <p>{status}</p>
     </div>
   );
