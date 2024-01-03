@@ -12,7 +12,6 @@ function App() {
   return (
     <>
       <PostContext.Provider value={(loading, setLoading)}>
-        {" "}
         {/**Learning how to properly use Context Hook */}
         <BrowserRouter>
           <Navbar></Navbar>

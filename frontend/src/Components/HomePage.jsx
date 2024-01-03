@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import PostPage from "./Posts";
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -60,15 +61,14 @@ const HomePage = () => {
         ) : posts && posts.length ? (
           posts.map((post) => (
             <div key={post._id}>
-              <h1>{post.title}</h1>
-              <img src={post.image} alt={`Image of ${post.title}`} />
-              <h2>{post.description}</h2>
-              {post.link ? (
-                <a href={post.link}>Click Here to learn more</a>
-              ) : (
-                <h1>Link Unavailable</h1>
-              )}
-              <button onClick={modifyPost}>Modify Post</button>
+              <PostPage post={post}></PostPage>
+              <button
+                onClick={() => {
+                  modifyPost(post._id);
+                }}
+              >
+                Modify Post
+              </button>
               <button
                 onClick={() => {
                   deletePost(post._id);
