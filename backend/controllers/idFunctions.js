@@ -1,6 +1,6 @@
 const postModel = require("../models/posts");
 
-async function GET() {
+async function GET(req, res) {
   const { id } = req?.params;
 
   const convertedID = id.toString();
@@ -13,7 +13,7 @@ async function GET() {
   }
 }
 
-async function DELETE() {
+async function DELETE(req, res) {
   const { id } = req?.params;
   const convertedID = String(id);
 
@@ -29,7 +29,7 @@ async function DELETE() {
   }
 }
 
-async function PUT() {
+async function PUT(req, res) {
   const { id } = req?.params;
   const convertedID = String(id);
 
