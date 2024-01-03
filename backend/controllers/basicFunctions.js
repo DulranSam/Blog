@@ -1,11 +1,11 @@
 const postModel = require("../models/posts");
 
-async function GET() {
+async function GET(req, res) {
   const postsData = await postModel.find();
   res.json(postsData).status(200);
 }
 
-async function POST() {
+async function POST(req, res) {
   const { title, description, link, photo } = req?.body;
   if (!title || !description)
     return res
